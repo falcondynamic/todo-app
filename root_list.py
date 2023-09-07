@@ -1,5 +1,7 @@
 from utils import find_index
+from database import tum_liste
 
+print("db", tum_liste(1))
 def crud_liste(girdiler, login, liste):
     try:
         if girdiler[0] == "add":
