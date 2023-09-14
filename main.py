@@ -1,25 +1,22 @@
 # # TODO App
+import database as db
 from root_list import crud_liste
 from root_user import crud_user
-from utils import read_users_file, write_users_file
-from database import close_db
+from utils import read_users_file
 
 # [{"urun":"ekmek", adet:5, user_id:1},{"urun":"su", adet:5, user_id:1}, {"urun":"seker", adet:5, user_id:1}]
-liste = []
+liste = db.all_shopping_list(1)
+print(liste)
 
-users = read_users_file()  # "[{id:1, username:"codingbook", password:"123"}]"
-print(users)
 
 liste_komutlari = ["add", "delete", "update"]
 user_komutlari = ["signup", "login", "signout"]
 login = {}
 
 
-
-
 def kapat():
     # Close the cursor and connection
-    close_db()
+    db.close_db()
 
 
 while True:
@@ -33,8 +30,8 @@ while True:
     girdiler = girdi.split()
 
     if girdiler[0] in user_komutlari:
-        crud_user(girdiler, login, users )
+        crud_user(girdiler, login )
     elif girdiler[0] in liste_komutlari:
-        liste = crud_liste(girdiler, login, liste)
+        liste = crud_liste(girdiler, login)
 
     print(liste)
